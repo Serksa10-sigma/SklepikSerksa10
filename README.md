@@ -1,1 +1,0 @@
-# SklepikSerksa10
