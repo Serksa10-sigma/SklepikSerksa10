@@ -1,15 +1,9 @@
-# SklepikSerksa10<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sklep Serksa10</title>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    (function(){
-      emailjs.init("RJJFsY3K2XhLMlepZ");
-    })();
-  </script>
+  <title>Sklep Serksa10</title>  
   <style>
     body {
       margin: 0;
@@ -21,7 +15,6 @@
       position: relative;
       min-height: 100vh;
     }
-    /* Animowane tło z gwiazdkami */
     body::before {
       content: "";
       position: fixed;
@@ -50,6 +43,7 @@
       gap: 20px;
       position: relative;
       z-index: 1;
+      min-height: 700px;
     }
     .product {
       background-color: #111;
@@ -92,8 +86,11 @@
       margin-top: 40px;
       border-top: 1px solid white;
       padding-top: 20px;
+      padding-bottom: 40px;
       position: relative;
       z-index: 1;
+      background: #111;
+      border-radius: 10px;
     }
     #cart h2 {
       margin-bottom: 10px;
@@ -102,35 +99,59 @@
       list-style: none;
       padding-left: 0;
       margin-bottom: 15px;
+      cursor: pointer;
     }
     #cart-list li {
       margin-bottom: 5px;
     }
 
-    #discount, #blik {
+    #order-form {
       margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-      max-width: 300px;
+      position: relative;
+      z-index: 1;
+      background: #111;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 400px;
     }
+
     label {
+      display: block;
+      margin-top: 10px;
       margin-bottom: 5px;
       font-weight: bold;
     }
-    input[type="text"],
-    input[type="email"] {
+
+    input[type="email"], select, input[type="text"] {
+      width: 100%;
       padding: 8px;
       border-radius: 5px;
-      border: none;
-      margin-bottom: 10px;
+      border: 1px solid #444;
+      background: #222;
+      color: white;
+      font-size: 14px;
     }
 
-    p {
-      margin-top: 40px;
-      font-size: 14px;
-      opacity: 0.7;
-      position: relative;
-      z-index: 1;
+    input[type="submit"] {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+      background-color: #ddd;
+    }
+
+    /* Ukryte pole na kod BLIK na start */
+    #blik-code-container {
+      display: none;
+      margin-top: 10px;
     }
 
     @media(max-width: 600px) {
@@ -142,7 +163,7 @@
         margin: 0 0 10px 0;
         max-width: 100%;
       }
-      #discount, #blik {
+      #order-form {
         max-width: 100%;
       }
     }
@@ -152,135 +173,216 @@
 
   <h1>Sklep Serksa10</h1>
   <div class="products">
+    <!-- Produkty -->
     <div class="product">
-      <img src="https://www.bing.com/th?id=OPEC.JJmaGlaNlSuzbQ474C474&o=5&pid=21.1&h=136&qlt=100&dpr=1&pcl=f5f5f5&w=150" alt="Koszulka Real Madryt" />
+      <img src="https://www.bing.com/th?id=OPEC.5%2fVqRsPFnvrMdg474C474&o=5&pid=21.1&h=136&qlt=100&dpr=1&pcl=f5f5f5&w=150" alt="Koszulka Real Madryt" />
       <div>
         <h2>Koszulka Real Madryt</h2>
         <p>Cena: 139 zł</p>
-        <button onclick="addToCart('Koszulka Real Madryt', 149)">Zamów teraz</button>
+        <button onclick="addToCart('Koszulka Real Madryt', 139)">Zamów teraz</button>
       </div>
     </div>
 
     <div class="product">
-      <img src="https://www.bing.com/th?id=OPEC.v%2brj9LJxgXNirg474C474&o=5&pid=21.1&w=136&h=158&qlt=100&dpr=1&pcl=f5f5f5" alt="Koszulka Atletico Madryt" />
+      <img src="https://www.bing.com/th/id/OIP.2dZyDyxug2tXrs10JrTEoQHaHa?w=193&h=215&c=8&rs=1&qlt=90&r=0&o=6&pid=3.1&rm=2" alt="Koszulka Atletico Madryt" />
       <div>
         <h2>Koszulka Atletico Madryt</h2>
         <p>Cena: 129 zł</p>
-        <button onclick="addToCart('Koszulka Atletico Madryt', 139)">Zamów teraz</button>
+        <button onclick="addToCart('Koszulka Atletico Madryt', 129)">Zamów teraz</button>
       </div>
     </div>
 
     <div class="product">
-      <img src="https://www.bing.com/th?id=OPEC.B0cnskXBL4s8Zw474C474&o=5&pid=21.1&w=160&h=212&qlt=100&dpr=1&pcl=f5f5f5" alt="Koszulka FC Barcelona" />
+      <img src="https://www.bing.com/th?id=OPEC.siVF1unwZEIFhA474C474&o=5&pid=21.1&w=148&h=223&qlt=100&dpr=1&bw=6&bc=FFFFFF" alt="Koszulka FC Barcelona" />
       <div>
         <h2>Koszulka FC Barcelona</h2>
         <p>Cena: 129 zł</p>
-        <button onclick="addToCart('Koszulka FC Barcelona', 149)">Zamów teraz</button>
+        <button onclick="addToCart('Koszulka FC Barcelona', 129)">Zamów teraz</button>
       </div>
     </div>
 
     <div class="product">
-      <img src="https://www.bing.com/th/id/OIP.az_1RWJXQOPhySrd8sgRDwHaHx?w=229&h=215&c=8&rs=1&qlt=90&r=0&o=6&pid=3.1&rm=2" alt="Koszulka Legia Warszawa" />
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoKCgoKCgsMDAsPEA4QDxYUExMUFiIYGhgaGCIzICUgICUgMy03LCksNy1RQDg4QFFeT0pPXnFlZXGPiI+7u/sBCgoKCgoKCwwMCw8QDhAPFhQTExQWIhgaGBoYIjMgJSAgJSAzLTcsKSw3LVFAODhAUV5PSk9ecWVlcY+Ij7u7+//CABEIAIAAgAMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAwQFAQIGB//aAAgBAQAAAAD9g4AA7wAAAAARVbMnoAGPFJPo9AHjF5LNNc6AZEXEkvq1N6B34RdvRU9iTs08w78DDf0vfj5TO3Po8XW2bHp8rnds25JHy3yVb9W0otj1kYVCltWrE3fPHqTaQYmPRue7EnmVct6XQ54ho5kfZZrOlYAAAAAAAA//xAAaAQEAAwEBAQAAAAAAAAAAAAAAAQIDBAUG/9oACgICEAMQAAAAmAAA5mrQAQ+VwT9Hr0SBzx4mPLGlu23o365OauceBjd26dNuSnpX3v41KRhTCt57L+xp0SQowiGjeZAAH//EADMQAAIBAwEFBgUEAgMAAAAAAAECAwAEERIFEyExUQYiMkFxgTBCUmGxECBQkVOSoaLB/9oACAEBAAE/AP5KWUR44ZJoX3HBgkA6jjSzxOM5I9Rigyt4SD8W4l1yMRy5CgxoNSS7jU58HzfYDzpWV1DKQQRkEcj8ORwiMxNNigKWvLjUL7vu47v4oMrciD8K9u4lvEtjIok0agmeJru88jFZ+kUCTnNKcE97ietAnz5UsgBBHipZ/qX+qVlbkc/A2yyyXcxEayIZTkMrt4OA8AJU9GqCS5jhjlVZJo3XVu5e7On2zyb341BfQTsVR++vijYaXX1U1wenaeMEx4fA8LHGfejtyyidY7zXZuTgb4Yjb0kGVpJEkRZEZXQ4wykEH3Fe5oHTyz7Uk7gd7j60k6OccQf28jmt8VuzvExGZdG8z83Q9AeQNQXDSOYLi7uobnzjyiA5+nC1HaqJkleWaR0DBDI5YLq54FA1kedSwxTIySIro3AhhkGrnstuGM+xryWxl+hGO7NN2i7TbEOnadpHPF/lxgf7pVj202LcACXeWrdHXUv9pUW0LCddUd7bOv2kWttdobGztZVt7hJbojEYQ6wh6sa2NtQ7RsILpO6WyHTmA68CKW5Hzrj7ildX8LA/rPa7tpY3QMGZsgjmGNSwIV3U0ZmhAwueMkYPr4h/zUMVxFHqguRcRZ4K54gdA/Eg+tR3aFgjZjkPyPwJ9PI+1aqVq58qZVcFXUEHmCM1f9jtmXZZ7fVayH6PB7rV12V21aE6IUuV6xH/AMaoNhbbncIuzpU+8uEUVsfZ67K2fDah9bDLO3V2OTRYUXKnUpwRSEsqk+YB/TaxVEjk6HTSXcMyMySKyhivuvMcanu7FG1nSH6qcH/rUm1rFo8nelDKseMAgsx6NUcUsfCOZSv0sdQ9vMUrsODLpP8AYpXoMPOicVrreVrJpVdiABkmimie3hlU5lJxjiO7xOT+s9vDcxmOVA6nyNP2esdOmOEIOgq47Jo7Flnl9M0ey5iKEDOk8KFrcxc1NCSReYNQzBiQTRuYASN6Pz+KN7AgzvCfQUs8LKGDZzQnhbUCXXjjhgUTBIg3TlHHXjmrWCONxK0pdwMDoM0CD+7AoxofKntIX5oKn2NbyggFkPUUOzMaA6biTic+Q/FN2cbylqPYt1ECqyDFDZU4pbCdfKktJxUMboO8f5L/xAArEQACAQMCAgoDAQAAAAAAAAABAgMABBEhMRJRBRATFCAwMkFhcTNCUtH/2gAIAQIBAT8A8mW8toWCySYP0TSyxvjgdWzyPiJCgk7CpXZ3ZjuTmo3aNg6nBFW9wk6AggN7r4blO0iKEkA8hmp7SWLU6jmKVA37gH5oxzQ4YqRyb/DUXSUqYEgDDnsaivYJcANhj7Np13EwgMbH0k4NT8U8WYnBBp0eNiGBFRXEsPobTkdqSazn/NEI2/pais7UESCTiA13GKa6eGVxE+Y86A6irS67yGBXDLU8SzxNG2xo9HSIcpJIoHup1Ndk+0nbH5Yg1LEFBYGtSM8JpIpZNlOOZ0FRdHSOw4pEC/BzVvbR24YJk5O568CjFGTkqKeyt5CSVOfuu5RYAy2BsM0tsi7E0Bjyf//EAB8RAQACAQQDAQAAAAAAAAAAAAEAAhESITAxAyBREP/aAAgBAwEBPwDhycI4YI+ttyIkJvC7Cx+2cYlhTaIkFOmFqvZAr3mZRcO0rbVEyTR8Zp+5lq/GYYVWHjgB66SaSY4v/9k=" />
       <div>
-        <h2>Koszulka Legia Warszawa</h2>
-        <p>Cena: 129 zł</p>
-        <button onclick="addToCart('Koszulka Legia Warszawa', 139)">Zamów teraz</button>
+        <h2>Korki Nike Mercurial</h2>
+        <p>Cena: 249 zł</p>
+        <button onclick="addToCart('Korki Nike Mercurial', 249)">Zamów teraz</button>
       </div>
     </div>
 
     <div class="product">
-      <img src="https://www.bing.com/th?id=OPEC.ZWjjzxyeEfSllA474C474&o=5&pid=21.1&h=124&qlt=100&dpr=1&bw=6&bc=FFFFFF&w=138" alt="Piłka Adidas UEFA" />
+      <img src="https://www.bing.com/th?id=OPEC.3r96CfR0ht8vZw474C474&o=5&pid=21.1&w=160&h=160&qlt=100&dpr=1&c=8&pcl=f5f5f5" alt="Rękawice Bramkarskie" />
+      <div>
+        <h2>Rękawice Bramkarskie</h2>
+        <p>Cena: 59 zł</p>
+        <button onclick="addToCart('Rękawice Bramkarskie', 59)">Zamów teraz</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://www.bing.com/th?id=OPEC.k9hah2nXOVxiag474C474&o=5&pid=21.1&h=136&qlt=100&dpr=1&pcl=f5f5f5&w=150" alt="Piłka Adidas UEFA" />
       <div>
         <h2>Piłka Adidas UEFA</h2>
         <p>Cena: 79 zł</p>
-        <button onclick="addToCart('Piłka Adidas UEFA', 119)">Zamów teraz</button>
+        <button onclick="addToCart('Piłka Adidas UEFA', 79)">Zamów teraz</button>
+      </div>
+    </div>
+
+    <!-- Nowe produkty -->
+    <div class="product">
+      <img src="https://www.bing.com/th?id=OPEC.cq%2fZxZOy8ZOcUA474C474&o=5&pid=21.1&w=160&h=210&qlt=100&dpr=1&c=8&pcl=f5f5f5" alt="Koszulka Juventus" />
+      <div>
+        <h2>Koszulka Juventus</h2>
+        <p>Cena: 149 zł</p>
+        <button onclick="addToCart('Koszulka Juventus', 149)">Zamów teraz</button>
       </div>
     </div>
 
     <div class="product">
-      <img src="https://www.bing.com/th?id=OPEC.fsEY4ePYfljcRQ474C474&o=5&pid=21.1&h=136&qlt=100&dpr=1&pcl=f5f5f5&w=150" alt="Buty Nike Mercurial" />
+      <img src="data:image/jpeg;base64,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" alt="Koszulka Manchester United" />
       <div>
-        <h2>Buty Nike Mercurial</h2>
-        <p>Cena: 129 zł</p>
-        <button onclick="addToCart('Buty Nike Mercurial', 289)">Zamów teraz</button>
+        <h2>Koszulka Manchester United</h2>
+        <p>Cena: 149 zł</p>
+        <button onclick="addToCart('Koszulka Manchester United', 149)">Zamów teraz</button>
       </div>
     </div>
+
+    <div class="product">
+      <img src="https://www.bing.com/th/id/OIP.DSI8iWYJUPEhPP6f7hx2OAHaJC?w=164&h=215&c=8&rs=1&qlt=90&r=0&o=6&pid=3.1&rm=2" alt="Koszulka Legia Warszawa" />
+      <div>
+        <h2>Koszulka Legia Warszawa</h2>
+        <p>Cena: 129 zł</p>
+        <button onclick="addToCart('Koszulka Legia Warszawa', 129)">Zamów teraz</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://www.bing.com/th?id=OPEC.%2flfDukWKBt6%2bxQ474C474&o=5&pid=21.1&w=160&h=160&qlt=100&dpr=1&c=8&pcl=f5f5f5" alt="Ochraniacze Piłkarskie" />
+      <div>
+        <h2>Ochraniacze Piłkarskie</h2>
+        <p>Cena: 79 zł</p>
+        <button onclick="addToCart('Ochraniacze Piłkarskie', 79)">Zamów teraz</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://www.bing.com/th?id=OPEC.FsLd%2bHqRfoOPsA474C474&o=5&pid=21.1&w=148&h=152&qlt=100&dpr=1&bw=6&bc=FFFFFF" alt="Pachołki Treningowe" />
+      <div>
+        <h2>Pachołki Treningowe</h2>
+        <p>Cena: 39 zł</p>
+        <button onclick="addToCart('Pachołki Treningowe', 39)">Zamów teraz</button>
+      </div>
+    </div>
+
   </div>
 
-  <div id="cart">
-    <h2>🛒 Koszyk</h2>
+  <section id="cart">
+    <h2>Twój koszyk</h2>
     <ul id="cart-list"></ul>
-    <p><strong>Razem: <span id="total">0</span> zł</strong></p>
+    <p><strong>Razem: </strong><span id="total-price">0</span> zł</p>
+  </section>
 
-    <div id="discount">
-      <label for="discount-code">Wprowadź kod rabatowy:</label>
-      <input type="text" id="discount-code" placeholder="Kod rabatowy" />
-    </div>
+  <section id="order-form-section">
+    <form id="order-form">
+      <label for="email">Email do kontaktu:</label>
+      <input type="email" id="email" required />
 
-    <div id="blik">
-      <label for="blik-code">Kod BLIK:</label>
-      <input type="text" id="blik-code" maxlength="6" placeholder="np. 123456" />
-      <label for="email">Twój e-mail:</label>
-      <input type="email" id="email" placeholder="np. serafin@example.com" />
-      <button onclick="placeOrder()">Zamów</button>
-    </div>
-    <p>Serksa10 2025 – wszystkie prawa zastrzeżone.</p>
-  </div>
+      <label for="payment">Wybierz formę płatności:</label>
+      <select id="payment" required onchange="toggleBlikInput()">
+        <option value="" disabled selected>Wybierz...</option>
+        <option value="blik">BLIK</option>
+        <option value="card">Karta płatnicza</option>
+        <option value="transfer">Przelew</option>
+      </select>
+
+      <div id="blik-code-container">
+        <label for="blik-code">Wpisz kod BLIK:</label>
+        <input type="text" id="blik-code" maxlength="6" pattern="\d{6}" />
+      </div>
+
+      <input type="submit" value="Złóż zamówienie" />
+    </form>
+  </section>
 
   <script>
-    const cart = [];
+    const cartList = document.getElementById('cart-list');
+    const totalPriceEl = document.getElementById('total-price');
+    let cart = [];
+
     function addToCart(name, price) {
-      cart.push({ name, price });
-      updateCart();
+      cart.push({name, price});
+      renderCart();
     }
 
-    function updateCart() {
-      const cartList = document.getElementById("cart-list");
-      const total = document.getElementById("total");
-      cartList.innerHTML = "";
-      let sum = 0;
-      cart.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.name} – ${item.price} zł`;
+    function renderCart() {
+      cartList.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = item.name + ' - ' + item.price + ' zł';
+        li.title = 'Kliknij, aby usunąć';
+        li.style.cursor = 'pointer';
+        li.addEventListener('click', () => {
+          removeFromCart(index);
+        });
         cartList.appendChild(li);
-        sum += item.price;
+        total += item.price;
       });
-      const discountCode = document.getElementById("discount-code").value;
-      if (discountCode === "SKLEP50") sum *= 0.5;
-      total.textContent = sum.toFixed(2);
+      totalPriceEl.textContent = total;
     }
 
-    function placeOrder() {
-      const code = document.getElementById("blik-code").value;
-      const email = document.getElementById("email").value;
-      if (!/^[0-9]{6}$/.test(code)) {
-        alert("Wpisz poprawny 6-cyfrowy kod BLIK!");
-        return;
-      }
-      if (!email || !email.includes("@")) {
-        alert("Wpisz poprawny e-mail!");
-        return;
-      }
-      if (cart.length === 0) {
-        alert("Twój koszyk jest pusty.");
-        return;
-      }
-      emailjs.send("service_jewxqe1", "template_glgrc9q", {
-        to_email: email,
-        message: "Twoje zamówienie zostało przyjęte! Paczka jest w drodze i dotrze w ciągu 4 dni."
-      }).then(() => {
-        alert("Zamówienie złożone! Sprawdź swój e-mail ❤");
-        cart.length = 0;
-        updateCart();
-        document.getElementById("blik-code").value = "";
-        document.getElementById("email").value = "";
-      }, (error) => {
-        alert("Błąd podczas wysyłania e-maila: " + error.text);
-      });
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      renderCart();
     }
 
-    document.getElementById("discount-code").addEventListener("input", updateCart);
+    function toggleBlikInput() {
+      const paymentSelect = document.getElementById('payment');
+      const blikContainer = document.getElementById('blik-code-container');
+      if(paymentSelect.value === 'blik') {
+        blikContainer.style.display = 'block';
+      } else {
+        blikContainer.style.display = 'none';
+      }
+    }
+
+    const orderForm = document.getElementById('order-form');
+    orderForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const payment = document.getElementById('payment').value;
+      const blikCode = document.getElementById('blik-code').value.trim();
+
+      if(cart.length === 0) {
+        alert('Twój koszyk jest pusty!');
+        return;
+      }
+
+      if(!email) {
+        alert('Podaj swój email.');
+        return;
+      }
+
+      if(!payment) {
+        alert('Wybierz formę płatności.');
+        return;
+      }
+
+      if(payment === 'blik') {
+        if(!/^\d{6}$/.test(blikCode)) {
+          alert('Wpisz poprawny 6-cyfrowy kod BLIK.');
+          return;
+        }
+      }
+
+      alert(`Dziękujemy za zamówienie!\n\nSzczegóły:\nEmail: ${email}\nPłatność: ${payment === 'blik' ? 'BLIK' : payment === 'card' ? 'Karta płatnicza' : 'Przelew'}\nIlość produktów: ${cart.length}\nKwota do zapłaty: ${totalPriceEl.textContent} zł`);
+      
+      // Czyszczenie koszyka i formularza
+      cart = [];
+      renderCart();
+      orderForm.reset();
+      toggleBlikInput();
+    });
   </script>
-
 </body>
 </html>
